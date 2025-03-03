@@ -52,7 +52,7 @@ public class PlayerInteract : MonoBehaviour
                         if (Action == true)
                         {
 
-                            AnimeObject.GetComponent<Animator>().Play("DoorOpen");
+                            AnimeObject.GetComponent<Animator>().Play("DoorOpen1");
                          
                             Action = false;
                                Debug.Log("Door is Open");
@@ -61,7 +61,7 @@ public class PlayerInteract : MonoBehaviour
                         else
                         {
 
-                            AnimeObject.GetComponent<Animator>().Play("DoorClosed");
+                            AnimeObject.GetComponent<Animator>().Play("DoorClosed1");
                             Action = true;
                             Debug.Log("Door is Close");
                         }

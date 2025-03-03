@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
 {
    
     private float health;
-    private float lerpTimer;
+  //  private float lerpTimer;
     [Header("Health Bar")]
     public float maxHealth = 100;
     public float chipSpeed = 2f;
@@ -38,22 +38,22 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         health = Mathf.Clamp(health, 0, maxHealth);
-        UpdateHealthUI();
+       // UpdateHealthUI();
        
 
 
 
             // Taking damage while Pressing down the left mouse
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+            //    if (Input.GetKeyDown(KeyCode.Mouse0))
                     
                    
 
-                {
-                    TakeDamage(Random.Range(5, 10));
-                    Debug.Log(health +" Remaining Health");
-
-                }
+              //  {
+              //      TakeDamage(Random.Range(5, 10));
+              //      Debug.Log(health +" Remaining Health");
+//
+              //  }
 
                 // restore health while pressing the H button
                 if (Input.GetKeyDown(KeyCode.H))
@@ -86,44 +86,44 @@ public class PlayerHealth : MonoBehaviour
 
 
     //health updater & how the HP bar moves while taking damage and restoring health.
-    public void UpdateHealthUI()
-    {
+ //   public void UpdateHealthUI()
+  //  {
         //Debug.Log(health);
-        float fillF = Front_Healthbar.fillAmount;
-        float fillB = Back_Healthbar.fillAmount;
-        float hFraction = health / maxHealth;
-        if (fillB > hFraction)
-        {
-            Front_Healthbar.fillAmount = hFraction;
-            Back_Healthbar.color = Color.red;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            Back_Healthbar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
+    //    float fillF = Front_Healthbar.fillAmount;
+    //    float fillB = Back_Healthbar.fillAmount;
+    //    float hFraction = health / maxHealth;
+    //    if (fillB > hFraction)
+    //    {
+    //        Front_Healthbar.fillAmount = hFraction;
+    //        Back_Healthbar.color = Color.red;
+   //         lerpTimer += Time.deltaTime;
+   //         float percentComplete = lerpTimer / chipSpeed;
+   //         Back_Healthbar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
 
-        }
-        if (fillF < hFraction)
-        {
-            Back_Healthbar.color = Color.green;
-            Back_Healthbar.fillAmount = hFraction;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
-            Front_Healthbar.fillAmount = Mathf.Lerp(fillF, Back_Healthbar.fillAmount, percentComplete);
-        }
-    }
+   //     }
+   //     if (fillF < hFraction)
+   //     {
+  //          Back_Healthbar.color = Color.green;
+   //         Back_Healthbar.fillAmount = hFraction;
+   //         lerpTimer += Time.deltaTime;
+   //         float percentComplete = lerpTimer / chipSpeed;
+   //         percentComplete = percentComplete * percentComplete;
+   //         Front_Healthbar.fillAmount = Mathf.Lerp(fillF, Back_Healthbar.fillAmount, percentComplete);
+   //     }
+ //   }
      //damage health
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        lerpTimer = 0f;
-        durationTimer = 0;
-        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
-    }
+   // public void TakeDamage(float damage)
+  //  {
+  //      health -= damage;
+  //      lerpTimer = 0f;
+   //     durationTimer = 0;
+   //     overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+   // }
     
     // restore health
     public void RestoreHealth(float healAmount)
     {
         health += healAmount;
-        lerpTimer = 0f;
+      //  lerpTimer = 0f;
     }
 }
