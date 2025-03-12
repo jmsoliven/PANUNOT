@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Drawing;
+using UnityEngine;
+
+
 
 
 public class CustomBullet : MonoBehaviour
@@ -25,10 +28,14 @@ public class CustomBullet : MonoBehaviour
 
     int collisions;
     PhysicsMaterial physics_mat;
+    public EnemyHealth ehealth;
+    public EnemyHealth emaxhealth;
+  
 
     private void Start()
     {
         Setup();
+      
     }
 
     private void Update()
@@ -39,6 +46,12 @@ public class CustomBullet : MonoBehaviour
         //Count down lifetime
         maxLifetime -= Time.deltaTime;
         if (maxLifetime <= 0) Explode();
+
+
+
+
+
+
     }
 
     private void Explode()
@@ -53,6 +66,7 @@ public class CustomBullet : MonoBehaviour
             //Get component of enemy and call Take Damage
 
             //Just an example!
+          
             enemies[i].GetComponent<EnemyAI>().TakeDamage(explosionDamage);
 
             //Add explosion force (if enemy has a rigidbody)
@@ -63,9 +77,10 @@ public class CustomBullet : MonoBehaviour
         //Add a little delay, just to make sure everything works fine
         Invoke("Delay", 0.005f);
     }
+ 
     private void Delay()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -76,8 +91,20 @@ public class CustomBullet : MonoBehaviour
         //Count up collisions
         collisions++;
 
+
+        //if the enemy collide with the bullet it will take a random damage
+        if (collision.gameObject.tag=="Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(Random.Range(2, 5));
+            
+        }
+
+
+
+
+
         //Explode if bullet hits an enemy directly and explodeOnTouch is activated
-       // if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        // if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
     }
 
     private void Setup()
@@ -95,9 +122,9 @@ public class CustomBullet : MonoBehaviour
     }
 
     /// Just to visualize the explosion range
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRange);
-    }
+   // private void OnDrawGizmosSelected()
+ //   {
+   //     Gizmos.color = Color.red;
+   //     Gizmos.DrawWireSphere(transform.position, explosionRange);
+   // }
 }

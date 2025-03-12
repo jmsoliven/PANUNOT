@@ -1,6 +1,10 @@
 ﻿
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Unity.VisualScripting;
+
 
 
 public class ProjectileGun : MonoBehaviour
@@ -33,6 +37,18 @@ public class ProjectileGun : MonoBehaviour
     public GameObject muzzleFlash;
     public TextMeshProUGUI ammunitionDisplay;
 
+
+  
+ 
+
+   
+
+  
+
+
+
+
+
     //bug fixing :D
     public bool allowInvoke = true;
 
@@ -41,6 +57,7 @@ public class ProjectileGun : MonoBehaviour
         //make sure magazine is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
+     
     }
 
     private void Update()
@@ -52,8 +69,8 @@ public class ProjectileGun : MonoBehaviour
             ammunitionDisplay.SetText(bulletsLeft / bulletsPerTap + " / " + magazineSize / bulletsPerTap);
     }
     private void MyInput()
-    {
-        //Check if allowed to hold down button and take corresponding input
+    { 
+            //Check if allowed to hold down button and take corresponding input
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
@@ -68,12 +85,14 @@ public class ProjectileGun : MonoBehaviour
             //Set bullets shot to 0
             bulletsShot = 0;
 
-            Shoot();
+            Shoot(); 
         }
+      
     }
 
-    private void Shoot()
-    {
+    private void Shoot() {
+
+        //transform.LookAt(enemy);
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
@@ -126,6 +145,7 @@ public class ProjectileGun : MonoBehaviour
         //if more than one bulletsPerTap make sure to repeat shoot function
         if (bulletsShot < bulletsPerTap && bulletsLeft > 0)
             Invoke("Shoot", timeBetweenShots);
+
     }
     private void ResetShot()
     {
@@ -145,4 +165,9 @@ public class ProjectileGun : MonoBehaviour
         bulletsLeft = magazineSize;
         reloading = false;
     }
+
+  
+
+
 }
+

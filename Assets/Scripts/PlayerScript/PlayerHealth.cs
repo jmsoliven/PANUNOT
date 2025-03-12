@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour
             
             if (health < 1000) 
            {
-               RestoreHealth(healrange);
+              RestoreHealth(healrange);
               Debug.Log(healrange + " HP restored!");
            }
 
